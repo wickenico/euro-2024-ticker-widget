@@ -21,7 +21,7 @@ This is a Scriptable widget that displays information about the next Euro 2024 m
 
 1. (if not done yet) Download the scriptable app form [AppStore](https://apps.apple.com/de/app/scriptable/id1405459188)
 2. In Scriptable create a new script
-3. Copy the code from script file [euro-2024-ticker-widget.js](https://github.com/wickenico/euro-2024-ticker-widget.js/blob/main/euro-2024-ticker-widget.js)
+3. Copy the code from script file [euro-2024-ticker-widget.js](https://github.com/wickenico/euro-2024-ticker-widget/blob/main/euro-2024-ticker-widget.js)
 4. Create a new widget on homescreen and select this script in scriptable
 
 ## Usage
