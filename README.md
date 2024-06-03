@@ -37,3 +37,6 @@ OpenligaDB: https://www.openligadb.de/Spielplan/em/2024
 If you have any ideas for extensions or changes just let me know.
 
 ## Roadmap
+
+- Add logo
+- Add parameter for languages de / en
