@@ -15,6 +15,64 @@ Changelog:
 // Fetch match data from the API
 const apiUrl = "https://api.openligadb.de/getmatchdata/em/2024";
 const response = await new Request(apiUrl).loadJSON();
+const language = "en"; // Set to "en" for English or "de" for German
+
+const teamNamesDE = [
+  "Deutschland",
+  "Schottland",
+  "Ungarn",
+  "Schweiz",
+  "Spanien",
+  "Kroatien",
+  "Italien",
+  "Albanien",
+  "Polen",
+  "Niederlande",
+  "Slowenien",
+  "Dänemark",
+  "Serbien",
+  "England",
+  "Rumänien",
+  "Ukraine",
+  "Belgien",
+  "Slowakei",
+  "Österreich",
+  "Frankreich",
+  "Türkei",
+  "Georgien",
+  "Portugal",
+  "Tschechien",
+];
+
+const teamNamesEN = [
+  "Germany",
+  "Scotland",
+  "Hungary",
+  "Switzerland",
+  "Spain",
+  "Croatia",
+  "Italy",
+  "Albania",
+  "Poland",
+  "Netherlands",
+  "Slovenia",
+  "Denmark",
+  "Serbia",
+  "England",
+  "Romania",
+  "Ukraine",
+  "Belgium",
+  "Slovakia",
+  "Austria",
+  "France",
+  "Turkey",
+  "Georgia",
+  "Portugal",
+  "Czech Republic",
+];
+
+const dayNamesDE = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
+const dayNamesEN = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 // Function to format date and time
 function formatDateTime(dateTimeString) {
@@ -24,17 +82,25 @@ function formatDateTime(dateTimeString) {
   formatter.useShortTimeStyle();
 
   // Get the day of the week
-  const dayFormatter = new DateFormatter();
-  dayFormatter.dateFormat = "E"; // E gives the abbreviated day of the week
-  const dayOfWeek = dayFormatter.string(date);
+  const dayIndex = date.getDay();
+  const dayOfWeek =
+    language === "de" ? dayNamesDE[dayIndex] : dayNamesEN[dayIndex];
 
   // Return the formatted date and time with the day of the week
   return `${dayOfWeek}, ${formatter.string(date)}`;
 }
 
+// Function to get the team name based on the language
+function getTeamName(teamName) {
+  const index = teamNamesDE.indexOf(teamName);
+  console.log(index);
+  if (index === -1) return teamName;
+  return language === "de" ? teamNamesDE[index] : teamNamesEN[index];
+}
+
 // Find the nearest upcoming match
 function findNearestMatch(matches) {
-  //const now = new Date("2024-06-22T17:00:00");
+  //const now = new Date("2024-06-20T17:00:00");
   const now = new Date();
   let nearestMatch = null;
   let nearestTimeDiff = Infinity;
@@ -98,7 +164,6 @@ wrapperStack.addSpacer();
 let teamStack = wrapperStack.addStack();
 teamStack.layoutHorizontally();
 teamStack.centerAlignContent();
-//teamStack.backgroundColor = Color.yellow();
 
 // Add remaining space to the wrapper stack to center content
 wrapperStack.addSpacer();
@@ -106,13 +171,13 @@ wrapperStack.addSpacer();
 let team1Stack = teamStack.addStack();
 team1Stack.layoutVertically();
 team1Stack.centerAlignContent();
-//team1Stack.backgroundColor = Color.red();
+
 let team1Icon = await loadImage(matchData.team1.teamIconUrl);
 let team1IconImage = team1Stack.addImage(team1Icon);
 team1IconImage.imageSize = new Size(50, 50);
 team1IconImage.cornerRadius = 4;
 team1Stack.addSpacer(4);
-let team1Name = team1Stack.addText(matchData.team1.shortName);
+let team1Name = team1Stack.addText(getTeamName(matchData.team1.teamName));
 team1Name.font = Font.mediumSystemFont(12);
 team1Name.centerAlignText();
 team1Name.textColor = Color.white();
@@ -129,13 +194,13 @@ teamStack.addSpacer(16);
 let team2Stack = teamStack.addStack();
 team2Stack.layoutVertically();
 team2Stack.centerAlignContent();
-//team2Stack.backgroundColor = Color.blue();
+
 let team2Icon = await loadImage(matchData.team2.teamIconUrl);
 let team2IconImage = team2Stack.addImage(team2Icon);
 team2IconImage.imageSize = new Size(50, 50);
 team2IconImage.cornerRadius = 4;
 team2Stack.addSpacer(4);
-let team2Name = team2Stack.addText(matchData.team2.shortName);
+let team2Name = team2Stack.addText(getTeamName(matchData.team2.teamName));
 team2Name.font = Font.mediumSystemFont(12);
 team2Name.centerAlignText();
 team2Name.textColor = Color.white();
