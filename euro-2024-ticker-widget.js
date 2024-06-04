@@ -1,7 +1,7 @@
 /* --------------------------------------------------------------
 Script: euro-2024-ticker-widget
 Author: Nico Wickersheim
-Version: 1.0.0
+Version: 1.0.1
 
 Description:
 Displays the nearest upcoming match of the UEFA EURO 2024 in a widget. 
@@ -10,6 +10,7 @@ The widget shows the group name, the team icons and names, the match date and ti
 Changelog:
 
 1.0.0: Initialization
+1.0.1: Added support for different languages (English and German)
 -------------------------------------------------------------- */
 
 // Fetch match data from the API
@@ -71,6 +72,26 @@ const teamNamesEN = [
   "Czech Republic",
 ];
 
+const groupNameDE = [
+  "1. Runde Gruppenphase",
+  "2. Runde Gruppenphase",
+  "3. Runde Gruppenphase",
+  "Achtelfinale",
+  "Viertelfinale",
+  "Halbfinale",
+  "Finale",
+];
+
+const groupNameEN = [
+  "1st Round Group Stage",
+  "2nd Round Group Stage",
+  "3rd Round Group Stage",
+  "Round of 16",
+  "Quarterfinals",
+  "Semifinals",
+  "Final",
+];
+
 const dayNamesDE = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
 const dayNamesEN = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -96,6 +117,12 @@ function getTeamName(teamName) {
   console.log(index);
   if (index === -1) return teamName;
   return language === "de" ? teamNamesDE[index] : teamNamesEN[index];
+}
+
+function getGroupName(groupName) {
+  const index = groupNameDE.indexOf(groupName);
+  if (index === -1) return groupName;
+  return language === "de" ? groupNameDE[index] : groupNameEN[index];
 }
 
 // Find the nearest upcoming match
@@ -148,7 +175,7 @@ title.textColor = Color.white();
 // Match Info
 widget.addSpacer(8);
 
-let matchInfo = widget.addText(`Group Stage - ${matchData.group.groupName}`);
+let matchInfo = widget.addText(getGroupName(matchData.group.groupName));
 matchInfo.font = Font.mediumSystemFont(14);
 matchInfo.centerAlignText();
 matchInfo.textColor = Color.white();

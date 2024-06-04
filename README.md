@@ -26,7 +26,7 @@ This is a Scriptable widget that displays information about the next Euro 2024 m
 
 ## Usage
 
-No parameters at the moment.
+You can set the language on line 18 by set the const langauge to "en" for english or "de" for german.
 
 ## Links
 
