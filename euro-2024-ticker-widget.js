@@ -59,6 +59,20 @@ const matchData = findNearestMatch(response);
 let widget = new ListWidget();
 widget.setPadding(16, 16, 16, 16);
 
+// Logo
+let logoStack = widget.addStack();
+logoStack.layoutHorizontally();
+logoStack.addSpacer();
+
+let logoUrl =
+  "https://seeklogo.com/images/U/uefa-euro-2024-logo-124EEA67D8-seeklogo.com.png";
+let logoIcon = await loadImage(logoUrl);
+let logoIconImage = logoStack.addImage(logoIcon);
+logoIconImage.imageSize = new Size(40, 40);
+
+logoStack.addSpacer();
+widget.addSpacer(8);
+
 // Title
 let title = widget.addText("UEFA EURO 2024");
 title.font = Font.boldSystemFont(16);
