@@ -38,5 +38,5 @@ If you have any ideas for extensions or changes just let me know.
 
 ## Roadmap
 
-- Add logo
+- DONE: Add logo
 - Add parameter for languages de / en
