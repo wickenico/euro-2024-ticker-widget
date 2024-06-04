@@ -41,4 +41,4 @@ If you have any ideas for extensions or changes just let me know.
 ## Roadmap
 
 - DONE: Add logo
-- Add parameter for languages de / en
+- DONE: Add parameter for languages de / en
