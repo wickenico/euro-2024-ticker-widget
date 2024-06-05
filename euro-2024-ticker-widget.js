@@ -114,7 +114,6 @@ function formatDateTime(dateTimeString) {
 // Function to get the team name based on the language
 function getTeamName(teamName) {
   const index = teamNamesDE.indexOf(teamName);
-  console.log(index);
   if (index === -1) return teamName;
   return language === "de" ? teamNamesDE[index] : teamNamesEN[index];
 }
@@ -151,6 +150,7 @@ const matchData = findNearestMatch(response);
 // Create a new widget
 let widget = new ListWidget();
 widget.setPadding(16, 16, 16, 16);
+widget.backgroundColor = Color.black();
 
 // Logo
 let logoStack = widget.addStack();
