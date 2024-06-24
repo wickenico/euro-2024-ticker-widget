@@ -17,6 +17,8 @@ Changelog:
 const apiUrl = "https://api.openligadb.de/getmatchdata/em/2024";
 const response = await new Request(apiUrl).loadJSON();
 const language = "en"; // Set to "en" for English or "de" for German
+// Placeholder flag URL
+const placeholderFlagUrl = "https://via.placeholder.com/20x20.png?text=Flag";
 
 const teamNamesDE = [
   "Deutschland",
@@ -285,8 +287,13 @@ locationWrapperStack.addSpacer();
 
 // Function to load an image from a URL
 async function loadImage(url) {
-  const req = new Request(url);
-  return await req.loadImage();
+  try {
+    const req = new Request(url);
+    return await req.loadImage();
+  } catch (e) {
+    const req = new Request(placeholderFlagUrl);
+    return await req.loadImage();
+  }
 }
 
 // Finalize the widget
